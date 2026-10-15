@@ -1,0 +1,15 @@
+{
+  "grossesse_maman_bebe_01.jpg": {
+    "description": "Smiling Black mother lifting her laughing baby in a light denim dress, bright white studio wall, warm joyful mood, subjects in the upper two thirds, calm space at the bottom",
+    "themes": [
+      "grossesse",
+      "bebe",
+      "maternite",
+      "fertilite",
+      "joie"
+    ],
+    "subjects_black": true,
+    "logo": "dark",
+    "focus_y": 92
+  }
+}
