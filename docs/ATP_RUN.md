@@ -16,3 +16,9 @@ Tool: Claude in Chrome on the user's signed in AnswerThePublic account (free pla
 
 ## Log
 - 2026-10-15: pma + Côte d'Ivoire, 16 ideas added (51 to 66).
+- 2026-10-15: rhinoplastie + Sénégal, 14 ideas added (67 to 80).
+- 2026-10-15: myopie + Cameroun, 18 ideas added (81 to 98).
+
+## Notes
+- Free plan shows 10 results per section, and AI Prompts are visible. The report fills in after about 20 seconds, reload it once.
+- The language box accepts "Fre", the country box takes 2 letter codes (CI, SN, CM, CD). The page layout shifts while loading, so take a screenshot before clicking by coordinates.
