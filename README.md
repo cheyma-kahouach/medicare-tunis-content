@@ -2,7 +2,7 @@
 
 Slides, photos and automation instructions for the Medicare Tunis carousel pipeline.
 
-- photos/ : Black subject photo library (at least 1080 px wide, named by theme)
+- photos/fertilite, photos/chirurgie_esthetique, photos/optique : Black subject photo library per specialty (at least 1080 px wide, named by theme)
 - slides/ : finished carousel slides, one folder per carousel
 - assets/ : logo
 - tools/build_carousel.py : builds the 5 slides from a JSON spec
