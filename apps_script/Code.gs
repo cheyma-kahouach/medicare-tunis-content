@@ -117,14 +117,15 @@ function getIdeas() {
       source: String(r[3] || ''),
       potential: String(r[8] || ''),
       rank: Number(r[9]) || 0,
-      decision: String(r[5] || '').trim()
+      decision: String(r[5] || '').trim(),
+      comment: String(r[6] || '')
     });
   });
   return out;
 }
 
 // action: 'approve', 'reject' ou 'reset'
-function decideIdea(row, n, action) {
+function decideIdea(row, n, action, comment) {
   var lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
@@ -134,10 +135,12 @@ function decideIdea(row, n, action) {
     var r = sh.getRange(row, 1, 1, 10).getValues()[0];
     if (String(r[0]) !== String(n)) throw new Error('La feuille a changé. Actualise la page.');
     if (String(r[7]) !== 'En attente') throw new Error('Un carrousel existe déjà pour cette idée.');
+    comment = String(comment || '').trim();
     if (action === 'approve') sh.getRange(row, 6).setValue('Approuvée');
     else if (action === 'reject') sh.getRange(row, 6).setValue('Rejetée');
     else if (action === 'reset') sh.getRange(row, 6).setValue('');
     else throw new Error('Action inconnue.');
+    if (comment && action !== 'reset') sh.getRange(row, 7).setValue(comment);
     SpreadsheetApp.flush();
     return getIdeas();
   } finally {

@@ -121,6 +121,7 @@ header.top h1 { font-size: 28px; font-weight: 600; }
 .ideas { display: flex; flex-direction: column; gap: 8px; max-width: 820px; }
 .svc { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 13px; color: var(--ink); }
 .idea .btns { flex-wrap: nowrap; }
+.ic { width: 100%; margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; background: var(--bg); color: var(--ink); font: inherit; font-size: 13px; resize: vertical; }
 .btn.sm { padding: 8px 12px; font-size: 13px; }
 @media (max-width: 860px) {
   .idea { grid-template-columns: minmax(0, 1fr); }
@@ -339,7 +340,7 @@ header.top h1 { font-size: 28px; font-weight: 600; }
     google.script.run
       .withSuccessHandler(function (res) { busy = false; ideas = res; render(); })
       .withFailureHandler(function (e) { busy = false; msg = (e && e.message ? String(e.message).replace(/^Error:\s*/, "") : "L'enregistrement a échoué."); msgErr = true; renderIdeas(); })
-      .decideIdea(i.row, i.n, action);
+      .decideIdea(i.row, i.n, action, (drafts['i' + i.row] || '').trim());
   }
   function renderIdeas() {
     $filters.textContent = "";
@@ -366,6 +367,12 @@ header.top h1 { font-size: 28px; font-weight: 600; }
       var m = el("div", "m");
       if (i.potential) m.appendChild(el("span", "chip " + (i.potential === "Élevé" ? "ok" : i.potential === "Moyen" ? "" : "warn"), "Potentiel " + i.potential.toLowerCase()));
       m.appendChild(el("span", "tag", i.service)); tx.appendChild(m);
+      if (i.comment && ideaFilter !== "todo") tx.appendChild(el("div", "prev", i.comment));
+      if (ideaFilter === "todo") {
+        var ta = document.createElement("textarea"); ta.className = "ic"; ta.rows = 2; ta.placeholder = "Commentaire ou angle souhaité (facultatif)";
+        ta.setAttribute("aria-label", "Commentaire pour l'idée " + i.idea); ta.value = drafts["i" + i.row] != null ? drafts["i" + i.row] : (i.comment || "");
+        ta.oninput = function () { drafts["i" + i.row] = ta.value; }; tx.appendChild(ta);
+      }
       var bt = el("div", "btns");
       if (ideaFilter === "todo") {
         var ok = el("button", "btn primary sm", "Approuver"); ok.type = "button"; ok.disabled = busy; ok.onclick = function () { saveIdea(i, "approve"); };
