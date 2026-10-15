@@ -5,7 +5,7 @@ Goal: keep a stock of finished carousels waiting for the reviewer. Nothing here 
 Google Sheet ID: 1u8JFdxYABPWXKk75KIXKauFp1uHbcfzCrUeq2rzjYzk (use the Google Sheets connector). Times are Tunis time (Africa/Tunis, UTC+1, no daylight saving).
 
 ## Tabs
-- "À valider": A N°, B Idée, C Service, D Source, E Date ajoutée, F Décision (Approuvée, Rejetée, À modifier), G Commentaire, H Statut (En attente, Carrousel créé).
+- "À valider": A N°, B Idée, C Service, D Source, E Date ajoutée, F Décision (Approuvée, Rejetée, À modifier), G Commentaire, H Statut (En attente, Carrousel créé), I Potentiel social, J Rang. Rows are sorted by Rang.
 - "Carrousels": A N°, B Idée, C Service, D to H Slide 1 to 5, I Légende Instagram, J Légende Facebook, K Légende TikTok, L Photo (URL), M to Q Image 1 to 5 (URLs), R Statut (Brouillon, À relire, À modifier, Prête, Programmée, Échec), S Prête (checkbox), T Publication Instagram et Facebook, U Publication TikTok, V ID Buffer, W Commentaire de la relectrice. Ignore any row whose idea starts with EXEMPLE.
 - "Journal": A Date et heure Tunis, B Étape, C N° de l'idée, D Résultat, E Détail. Append one line per idea handled, skipped or failed.
 
@@ -13,7 +13,7 @@ Google Sheet ID: 1u8JFdxYABPWXKk75KIXKauFp1uHbcfzCrUeq2rzjYzk (use the Google Sh
 1. Read docs/brief.md in the repo fully before writing any copy.
 2. Stock check. Count Carrousels rows (not EXEMPLE) with Statut À relire, À modifier or Prête. Target stock is 7. Create at most 3 new carousels per run, and none if the stock is already 7 or more. Rework requests (below) do not count toward the 3.
 3. Rework first. For each Carrousels row with Statut À modifier: read the reviewer comment in column W, rewrite the affected slides or captions, rebuild the slides into a NEW folder (add a suffix like _v2 so cached images are not served), update the row (columns D to Q), set Statut À relire, tick off S (FALSE), keep the comment text.
-4. New carousels. Take approved ideas in order: rows of "À valider" with Décision Approuvée and Statut En attente, lowest N° first. For each:
+4. New carousels. Take approved ideas in order: rows of "À valider" with Décision Approuvée and Statut En attente, in the order of the tab (top row first, the tab is sorted by Rang, the most likely to be explosive on social media). For each:
    a. Read the last 5 Carrousels rows for the variation rule. Write the copy per docs/brief.md and run its self check.
    b. Pick the photo using the catalog. Each service folder has a catalog.json: file name to {description, themes, subjects_black, logo, focus_y}.
       1. Update the catalog first: list the images in the idea's service folder (photos/fertilite for Fertilité, photos/chirurgie_esthetique for Chirurgie esthétique, photos/optique for Optique). For every image with no catalog entry, open it and write an entry: one sentence describing who is in it, what they do, the setting, the mood and where the empty space is; 3 to 6 theme words in French without accents; subjects_black true or false (judge by looking); logo "white" if the top centre of the photo is dark, else "dark"; focus_y (0 to 100) that keeps faces above the bottom 40 percent of a 1080x1350 slide. Commit the updated catalog with the slides. Never use an image where subjects_black is false.
