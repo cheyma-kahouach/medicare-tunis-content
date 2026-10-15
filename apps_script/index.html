@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<base target="_blank">
+<meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Figtree:wght@400;500;600&display=swap">
+<style>
+:root {
+  --bg: #f3f7fc; --surface: #ffffff; --ink: #0f1d44; --muted: #5a688a; --line: #d9e3f1;
+  --brand: #16337a; --on-brand: #ffffff; --sky: #dcebfa; --accent: #2a6fdb;
+  --ok: #1c7a4f; --ok-bg: #dff3e8; --warn: #8a5200; --warn-bg: #fdf0d6; --bad: #b3261e; --bad-bg: #fbe3e1;
+  --info: #234a9c; --info-bg: #e3edfb;
+  --slide-dark-a: #16337a; --slide-dark-b: #2f78d8; --slide-dark-fg: #ffffff;
+  --slide-light-bg: #e8f1fb; --slide-light-fg: #14275f;
+  --tt-bg: #050505; --tt-fg: #ffffff;
+  --font-display: "Outfit", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Figtree", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0c1530; --surface: #121d3d; --ink: #e8eefc; --muted: #98a6c9; --line: #24325c;
+    --brand: #5b8def; --on-brand: #08122c; --sky: #1a2a55; --accent: #7aa7ff;
+    --ok: #6fd3a0; --ok-bg: #12362a; --warn: #f0b95a; --warn-bg: #3a2c10; --bad: #ff8d85; --bad-bg: #3d1a1a;
+    --info: #a9c3ff; --info-bg: #1a2c5c; color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; padding: 20px 16px 40px; }
+.wrap { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+h1, h2, h3 { font-family: var(--font-display); margin: 0; text-wrap: balance; }
+button { font: inherit; color: inherit; cursor: pointer; }
+button:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+header.top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; }
+.brandline { font-family: var(--font-display); font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+header.top h1 { font-size: 28px; font-weight: 600; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.filter { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 14px; font-size: 13px; font-weight: 500; display: inline-flex; gap: 8px; align-items: center; }
+.filter[aria-pressed="true"] { background: var(--brand); color: var(--on-brand); border-color: var(--brand); }
+.filter b { font-variant-numeric: tabular-nums; font-weight: 600; }
+.refresh { border: 1px solid var(--line); background: none; border-radius: 999px; padding: 6px 14px; font-size: 13px; color: var(--muted); }
+.layout { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 24px; align-items: start; }
+.list { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.item { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 12px; text-align: left; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 10px; align-items: center; }
+.item[aria-current="true"] { border-color: var(--brand); box-shadow: 0 0 0 2px var(--brand); }
+.thumb { width: 44px; aspect-ratio: 4 / 5; border-radius: 6px; overflow: hidden; background: linear-gradient(160deg, var(--slide-dark-a), var(--slide-dark-b)); }
+.thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.item .t { font-weight: 600; font-size: 14px; line-height: 1.3; overflow-wrap: anywhere; }
+.item .m { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; align-items: center; }
+.tag { font-size: 12px; color: var(--muted); }
+.chip { font-size: 12px; font-weight: 600; border-radius: 999px; padding: 2px 10px; background: var(--info-bg); color: var(--info); white-space: nowrap; }
+.chip.ok { background: var(--ok-bg); color: var(--ok); } .chip.warn { background: var(--warn-bg); color: var(--warn); } .chip.bad { background: var(--bad-bg); color: var(--bad); }
+.stage { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.stagehead h2 { font-size: 22px; font-weight: 600; }
+.stagehead .sub { color: var(--muted); font-size: 14px; margin-top: 2px; }
+.banner { background: var(--warn-bg); color: var(--warn); border-radius: 10px; padding: 10px 14px; font-size: 14px; }
+.tabs { display: flex; gap: 6px; border-bottom: 1px solid var(--line); }
+.tab { border: 0; background: none; padding: 10px 16px; font-weight: 600; color: var(--muted); border-bottom: 3px solid transparent; margin-bottom: -1px; }
+.tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--brand); }
+.panes { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 24px; align-items: start; }
+.mock { width: 100%; max-width: 380px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); overflow: hidden; }
+.mockhead { display: flex; align-items: center; gap: 10px; padding: 10px 12px; }
+.avatar { width: 34px; height: 34px; border-radius: 50%; background: var(--brand); color: var(--on-brand); font-family: var(--font-display); font-weight: 700; font-size: 13px; display: grid; place-items: center; flex: none; }
+.mockhead .n { font-weight: 600; font-size: 14px; line-height: 1.2; } .mockhead .s { font-size: 12px; color: var(--muted); }
+.cap { padding: 4px 12px 12px; font-size: 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.cap .h { color: var(--accent); } .cap.empty { color: var(--muted); font-style: italic; }
+.acts { display: flex; gap: 14px; padding: 10px 12px 4px; align-items: center; }
+.acts svg, .react svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.acts .sp { flex: 1; }
+.react { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+.react span { display: flex; gap: 8px; justify-content: center; align-items: center; padding: 10px 4px; font-size: 13px; font-weight: 600; color: var(--muted); }
+.react svg { width: 18px; height: 18px; }
+.car { position: relative; background: var(--sky); }
+.track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+.track::-webkit-scrollbar { display: none; }
+.slide { flex: 0 0 100%; scroll-snap-align: start; aspect-ratio: 4 / 5; position: relative; overflow: hidden; }
+.slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.slide.ph { display: flex; flex-direction: column; justify-content: space-between; padding: 22px; }
+.slide.ph.first { background: linear-gradient(170deg, var(--slide-dark-a), var(--slide-dark-b)); color: var(--slide-dark-fg); justify-content: flex-end; }
+.slide.ph.rest { background: var(--slide-light-bg); color: var(--slide-light-fg); }
+.slide.ph .lg { font-family: var(--font-display); font-weight: 600; font-size: 13px; opacity: .85; }
+.slide.ph.first .lg { position: absolute; top: 18px; left: 22px; }
+.slide.ph p { margin: 0; font-family: var(--font-display); font-weight: 600; font-size: 19px; line-height: 1.3; white-space: pre-wrap; }
+.slide.ph.first p { font-size: 24px; text-transform: uppercase; }
+.slide.ph.rest p { margin-top: 28%; font-weight: 500; }
+.slide.ph .pn { font-size: 12px; opacity: .7; }
+.arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; border-radius: 50%; border: 0; background: rgba(255,255,255,.88); color: #14275f; display: grid; place-items: center; box-shadow: 0 1px 4px rgba(0,0,0,.3); }
+.arrow[hidden] { display: none; } .arrow.l { left: 8px; } .arrow.r { right: 8px; }
+.arrow svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.dots { display: flex; gap: 5px; justify-content: center; padding: 8px 0 2px; }
+.dots i { width: 6px; height: 6px; border-radius: 50%; background: var(--line); display: block; } .dots i.on { background: var(--accent); }
+.ttwrap { display: flex; justify-content: center; }
+.tt { position: relative; aspect-ratio: 9 / 16; background: var(--tt-bg); color: var(--tt-fg); display: flex; flex-direction: column; justify-content: center; border-radius: 14px; border: 1px solid var(--line); overflow: hidden; width: 100%; max-width: 320px; }
+.tt .car { margin-bottom: 60px; }
+.tt .dots { position: absolute; left: 0; right: 0; bottom: 138px; padding: 0; z-index: 2; }
+.tt .dots i { background: rgba(255,255,255,.4); } .tt .dots i.on { background: #fff; }
+.tt .over { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 64px 18px 14px; background: linear-gradient(transparent, rgba(0,0,0,.85) 40%); font-size: 13px; z-index: 1; }
+.tt .over .u { font-weight: 700; margin-bottom: 4px; }
+.tt .over .c { white-space: pre-wrap; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+.tt .over .c .h { font-weight: 700; }
+.tt .rail { position: absolute; right: 10px; bottom: 90px; display: flex; flex-direction: column; gap: 18px; align-items: center; z-index: 2; }
+.tt .rail svg { width: 26px; height: 26px; stroke: #fff; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.tt .avatar { width: 38px; height: 38px; }
+.decide { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.decide h3 { font-size: 17px; font-weight: 600; }
+.decide label { font-size: 13px; font-weight: 600; color: var(--muted); }
+.decide textarea { width: 100%; min-height: 96px; resize: vertical; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; background: var(--bg); color: var(--ink); font: inherit; }
+.btns { display: flex; flex-wrap: wrap; gap: 8px; }
+.btn { border-radius: 10px; padding: 10px 16px; font-weight: 600; border: 1px solid var(--line); background: var(--surface); }
+.btn.primary { background: var(--brand); color: var(--on-brand); border-color: var(--brand); }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.note { font-size: 13px; color: var(--muted); } .note.err { color: var(--bad); }
+.prev { background: var(--bg); border-radius: 10px; padding: 10px 12px; font-size: 14px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.empty { border: 1px dashed var(--line); border-radius: 14px; padding: 40px 20px; text-align: center; color: var(--muted); background: var(--surface); }
+.empty h2 { color: var(--ink); font-size: 20px; margin-bottom: 6px; }
+.modes { display: flex; gap: 8px; margin-top: 10px; }
+.mode { border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 8px 16px; font-weight: 600; }
+.mode[aria-pressed="true"] { background: var(--brand); color: var(--on-brand); border-color: var(--brand); }
+.idea { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+.idea .t { font-weight: 600; overflow-wrap: anywhere; }
+.idea .m { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; align-items: center; }
+.ideas { display: flex; flex-direction: column; gap: 8px; max-width: 820px; }
+.svc { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 6px 12px; font: inherit; font-size: 13px; color: var(--ink); }
+.idea .btns { flex-wrap: nowrap; }
+.btn.sm { padding: 8px 12px; font-size: 13px; }
+@media (max-width: 860px) {
+  .idea { grid-template-columns: minmax(0, 1fr); }
+  .layout { grid-template-columns: minmax(0, 1fr); }
+  .list { flex-direction: row; overflow-x: auto; padding-bottom: 6px; }
+  .item { min-width: 240px; }
+  .panes { grid-template-columns: minmax(0, 1fr); }
+  .mock, .tt { margin: 0 auto; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="brandline">Medicare Tunis</div>
+      <h1 id="title">Relecture des publications</h1>
+      <div class="modes" id="modes"></div>
+    </div>
+    <div class="filters" id="filters"></div>
+  </header>
+  <div id="app"><div class="empty"><h2>Chargement des publications</h2><p>Un instant.</p></div></div>
+</div>
+<script>
+(function () {
+  var STATUS = ["À relire", "Prête", "À modifier", "Programmée", "Échec"];
+  var posts = [], selRow = null, platform = "instagram", filter = "all", slideIdx = 0;
+  var drafts = {}, busy = false, msg = "", msgErr = false, loaded = false;
+  var mode = "ideas", ideas = [], ideaFilter = "todo", ideaService = "all", ideasLoaded = false;
+  var $modes = document.getElementById("modes"), $title = document.getElementById("title");
+  var $app = document.getElementById("app"), $filters = document.getElementById("filters");
+
+  var ICON = {
+    heart: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
+    comment: '<path d="M20 12a8 8 0 0 1-11.8 7L4 20l1.1-4A8 8 0 1 1 20 12z"/>',
+    send: '<path d="M21 4 3 11l7 2.5L12.5 21z"/><path d="M10 13.5 21 4"/>',
+    save: '<path d="M6 4h12v16l-6-4-6 4z"/>',
+    like: '<path d="M7 11v9H4v-9zM7 11l4-7c1.7 0 2.5 1.2 2.2 2.8L12.7 10H19a2 2 0 0 1 2 2.3l-1.2 6A2 2 0 0 1 17.8 20H7"/>',
+    share: '<path d="M4 12v7h16v-7M12 3v12M8 7l4-4 4 4"/>',
+    prev: '<path d="M15 5l-7 7 7 7"/>',
+    next: '<path d="M9 5l7 7-7 7"/>'
+  };
+  function icon(n) { var s = document.createElementNS("http://www.w3.org/2000/svg", "svg"); s.setAttribute("viewBox", "0 0 24 24"); s.setAttribute("aria-hidden", "true"); s.innerHTML = ICON[n]; return s; }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function chipClass(s) { return s === "Prête" || s === "Programmée" ? "ok" : s === "À modifier" ? "warn" : s === "Échec" ? "bad" : ""; }
+  function statusOf(p) { return STATUS.indexOf(p.status) >= 0 ? p.status : "À relire"; }
+  function current() { return posts.filter(function (x) { return x.row === selRow; })[0]; }
+
+  function capNode(text, cls) {
+    var d = el("div", cls || "cap");
+    if (!text) { d.className = (cls || "cap") + " empty"; d.textContent = "Légende à venir."; return d; }
+    String(text).split(/(#[\p{L}\p{N}_]+)/u).forEach(function (part) {
+      if (/^#[\p{L}\p{N}_]+$/u.test(part)) d.appendChild(el("span", "h", part)); else d.appendChild(document.createTextNode(part));
+    });
+    return d;
+  }
+  function slideNode(s, i, total) {
+    var d = el("div", "slide");
+    if (s && s.image) { var im = document.createElement("img"); im.src = s.image; im.alt = "Slide " + (i + 1) + " sur " + total; d.appendChild(im); return d; }
+    d.className = "slide ph " + (i === 0 ? "first" : "rest");
+    d.appendChild(el("span", "lg", "Medicare Tunis"));
+    d.appendChild(el("p", null, (s && s.text) || ""));
+    d.appendChild(el("span", "pn", "Aperçu du texte · " + (i + 1) + "/" + total));
+    return d;
+  }
+  function carousel(p) {
+    var slides = p.slides || [], n = slides.length || 5;
+    var root = el("div"), car = el("div", "car"), track = el("div", "track");
+    for (var i = 0; i < n; i++) track.appendChild(slideNode(slides[i], i, n));
+    var dots = el("div", "dots"), dl = [];
+    for (var j = 0; j < n; j++) { var dt = el("i"); dots.appendChild(dt); dl.push(dt); }
+    var l = el("button", "arrow l"), r = el("button", "arrow r");
+    l.type = r.type = "button"; l.setAttribute("aria-label", "Slide précédente"); r.setAttribute("aria-label", "Slide suivante");
+    l.appendChild(icon("prev")); r.appendChild(icon("next"));
+    function mark(k) { slideIdx = k; dl.forEach(function (x, m) { x.className = m === k ? "on" : ""; }); l.hidden = k === 0; r.hidden = k === n - 1; }
+    function go(k) { track.scrollTo({ left: track.clientWidth * k, behavior: "smooth" }); }
+    l.onclick = function () { go(Math.max(0, slideIdx - 1)); };
+    r.onclick = function () { go(Math.min(n - 1, slideIdx + 1)); };
+    track.addEventListener("scroll", function () { var k = Math.round(track.scrollLeft / Math.max(1, track.clientWidth)); if (k !== slideIdx) mark(k); });
+    car.appendChild(track); car.appendChild(l); car.appendChild(r);
+    root.appendChild(car); root.appendChild(dots);
+    mark(Math.min(slideIdx, n - 1));
+    setTimeout(function () { track.scrollLeft = track.clientWidth * slideIdx; }, 0);
+    return { root: root, car: car, dots: dots };
+  }
+  function mockIG(p) {
+    var m = el("div", "mock"), h = el("div", "mockhead");
+    h.appendChild(el("div", "avatar", "MT"));
+    var w = el("div"); w.appendChild(el("div", "n", "Medicare Tunis")); w.appendChild(el("div", "s", "Tunisie")); h.appendChild(w);
+    m.appendChild(h); m.appendChild(carousel(p).root);
+    var a = el("div", "acts"); ["heart", "comment", "send"].forEach(function (k) { a.appendChild(icon(k)); });
+    a.appendChild(el("span", "sp")); a.appendChild(icon("save")); m.appendChild(a);
+    m.appendChild(capNode(p.captions.instagram));
+    return m;
+  }
+  function mockFB(p) {
+    var m = el("div", "mock"), h = el("div", "mockhead");
+    h.appendChild(el("div", "avatar", "MT"));
+    var w = el("div"); w.appendChild(el("div", "n", "Medicare Tunis")); w.appendChild(el("div", "s", "À l'instant · Public")); h.appendChild(w);
+    m.appendChild(h); m.appendChild(capNode(p.captions.facebook)); m.appendChild(carousel(p).root);
+    var r = el("div", "react");
+    [["like", "J'aime"], ["comment", "Commenter"], ["share", "Partager"]].forEach(function (x) { var s = el("span"); s.appendChild(icon(x[0])); s.appendChild(document.createTextNode(x[1])); r.appendChild(s); });
+    m.appendChild(r);
+    return m;
+  }
+  function mockTT(p) {
+    var wrap = el("div", "ttwrap"), t = el("div", "tt"), c = carousel(p);
+    t.appendChild(c.car); t.appendChild(c.dots);
+    var rail = el("div", "rail"); rail.appendChild(el("div", "avatar", "MT"));
+    ["heart", "comment", "save", "share"].forEach(function (k) { rail.appendChild(icon(k)); });
+    t.appendChild(rail);
+    var o = el("div", "over"); o.appendChild(el("div", "u", "Medicare Tunis")); o.appendChild(capNode(p.captions.tiktok, "c")); t.appendChild(o);
+    wrap.appendChild(t);
+    return wrap;
+  }
+  function visible() { return posts.filter(function (p) { return filter === "all" || statusOf(p) === filter; }); }
+
+  function renderFilters() {
+    $filters.textContent = "";
+    var defs = [["all", "Toutes"]].concat(STATUS.slice(0, 4).map(function (s) { return [s, s]; }));
+    defs.forEach(function (d) {
+      var n = d[0] === "all" ? posts.length : posts.filter(function (p) { return statusOf(p) === d[0]; }).length;
+      var b = el("button", "filter"); b.type = "button"; b.setAttribute("aria-pressed", String(filter === d[0]));
+      b.appendChild(document.createTextNode(d[1])); b.appendChild(el("b", null, String(n)));
+      b.onclick = function () { filter = d[0]; var v = visible(); if (!v.some(function (p) { return p.row === selRow; })) { selRow = v[0] ? v[0].row : null; slideIdx = 0; } render(); };
+      $filters.appendChild(b);
+    });
+    var rf = el("button", "refresh", "Actualiser"); rf.type = "button"; rf.onclick = load; $filters.appendChild(rf);
+  }
+  function renderList(v) {
+    var list = el("nav", "list");
+    v.forEach(function (p) {
+      var b = el("button", "item"); b.type = "button"; if (p.row === selRow) b.setAttribute("aria-current", "true");
+      var th = el("div", "thumb"); var s0 = p.slides[0]; if (s0 && s0.image) { var im = document.createElement("img"); im.src = s0.image; im.alt = ""; th.appendChild(im); }
+      var tx = el("div"); tx.appendChild(el("div", "t", p.idea));
+      var mt = el("div", "m"); mt.appendChild(el("span", "chip " + chipClass(statusOf(p)), statusOf(p)));
+      if (p.service) mt.appendChild(el("span", "tag", p.service));
+      tx.appendChild(mt); b.appendChild(th); b.appendChild(tx);
+      b.onclick = function () { selRow = p.row; slideIdx = 0; msg = ""; render(); };
+      list.appendChild(b);
+    });
+    return list;
+  }
+  function decide(p) {
+    var st = statusOf(p), box = el("section", "decide");
+    box.appendChild(el("h3", null, "Votre décision"));
+    var info = el("div"); info.appendChild(el("span", "chip " + chipClass(st), st)); box.appendChild(info);
+    if (p.scheduledIg && st === "Programmée") box.appendChild(el("div", "note", "Instagram et Facebook : " + p.scheduledIg + (p.scheduledTt ? " · TikTok : " + p.scheduledTt : "")));
+    if (p.comment && st === "À modifier") { box.appendChild(el("label", null, "Votre dernier commentaire")); box.appendChild(el("div", "prev", p.comment)); }
+    if (st === "Programmée") { box.appendChild(el("div", "note", "Cette publication est déjà programmée.")); return box; }
+    var lab = el("label", null, "Commentaire (obligatoire pour demander des modifications)"); lab.setAttribute("for", "comment");
+    var ta = document.createElement("textarea"); ta.id = "comment"; ta.value = drafts[p.row] != null ? drafts[p.row] : "";
+    ta.oninput = function () { drafts[p.row] = ta.value; };
+    box.appendChild(lab); box.appendChild(ta);
+    var bt = el("div", "btns");
+    var ok = el("button", "btn primary", st === "Prête" ? "Approuvée" : "Approuver"); ok.type = "button"; ok.disabled = busy || st === "Prête";
+    var no = el("button", "btn", "Demander des modifications"); no.type = "button"; no.disabled = busy;
+    ok.onclick = function () { save(p, "approve"); }; no.onclick = function () { save(p, "changes"); };
+    bt.appendChild(ok); bt.appendChild(no);
+    if (st === "Prête") { var back = el("button", "btn", "Remettre à relire"); back.type = "button"; back.disabled = busy; back.onclick = function () { save(p, "reset"); }; bt.appendChild(back); }
+    box.appendChild(bt);
+    var nt = el("div", "note" + (msgErr ? " err" : ""), msg); nt.setAttribute("role", "status"); box.appendChild(nt);
+    return box;
+  }
+  function save(p, action) {
+    if (busy) return;
+    var c = (drafts[p.row] || "").trim();
+    if (action === "changes" && !c) { msg = "Écris un commentaire pour dire ce qu'il faut changer."; msgErr = true; renderStage(); return; }
+    busy = true; msg = "Enregistrement..."; msgErr = false; renderStage();
+    google.script.run
+      .withSuccessHandler(function (res) {
+        busy = false; delete drafts[p.row]; posts = res;
+        msg = action === "approve" ? "Publication approuvée. Elle sera programmée automatiquement." : action === "changes" ? "Modifications demandées. Elles seront reprises." : "Remise à relire.";
+        msgErr = false; render();
+      })
+      .withFailureHandler(function (e) {
+        busy = false; msg = (e && e.message ? String(e.message).replace(/^Error:\s*/, "") : "L'enregistrement a échoué. Réessaie dans un instant."); msgErr = true; renderStage();
+      })
+      .decide(p.row, p.n, action, c);
+  }
+  function renderStage() {
+    var host = document.getElementById("stage"); if (!host) return;
+    var p = current(); host.textContent = ""; if (!p) return;
+    var head = el("div", "stagehead");
+    head.appendChild(el("h2", null, p.idea));
+    head.appendChild(el("div", "sub", (p.service || "") + " · Idée n° " + p.n));
+    host.appendChild(head);
+    if (p.example) host.appendChild(el("div", "banner", "Exemple de présentation. Cette publication ne sera pas programmée."));
+    var tabs = el("div", "tabs"); tabs.setAttribute("role", "tablist");
+    [["instagram", "Instagram"], ["facebook", "Facebook"], ["tiktok", "TikTok"]].forEach(function (t) {
+      var b = el("button", "tab", t[1]); b.type = "button"; b.setAttribute("role", "tab"); b.setAttribute("aria-selected", String(platform === t[0]));
+      b.onclick = function () { platform = t[0]; renderStage(); }; tabs.appendChild(b);
+    });
+    host.appendChild(tabs);
+    var panes = el("div", "panes");
+    panes.appendChild(platform === "instagram" ? mockIG(p) : platform === "facebook" ? mockFB(p) : mockTT(p));
+    panes.appendChild(decide(p));
+    host.appendChild(panes);
+  }
+  function renderModes() {
+    $modes.textContent = "";
+    [["ideas", "Idées à valider"], ["posts", "Carrousels à relire"]].forEach(function (d) {
+      var b = el("button", "mode", d[1]); b.type = "button"; b.setAttribute("aria-pressed", String(mode === d[0]));
+      b.onclick = function () { mode = d[0]; msg = ""; render(); }; $modes.appendChild(b);
+    });
+    $title.textContent = mode === "ideas" ? "Validation des idées" : "Relecture des publications";
+  }
+  function ideaList() {
+    return ideas.filter(function (i) {
+      var d = i.decision === "Approuvée" ? "ok" : i.decision === "Rejetée" ? "no" : "todo";
+      return d === ideaFilter && (ideaService === "all" || i.service === ideaService);
+    });
+  }
+  function saveIdea(i, action) {
+    if (busy) return; busy = true; msg = ""; renderIdeas();
+    google.script.run
+      .withSuccessHandler(function (res) { busy = false; ideas = res; render(); })
+      .withFailureHandler(function (e) { busy = false; msg = (e && e.message ? String(e.message).replace(/^Error:\s*/, "") : "L'enregistrement a échoué."); msgErr = true; renderIdeas(); })
+      .decideIdea(i.row, i.n, action);
+  }
+  function renderIdeas() {
+    $filters.textContent = "";
+    var cnt = { todo: 0, ok: 0, no: 0 };
+    ideas.forEach(function (i) { cnt[i.decision === "Approuvée" ? "ok" : i.decision === "Rejetée" ? "no" : "todo"]++; });
+    [["todo", "À décider"], ["ok", "Approuvées"], ["no", "Rejetées"]].forEach(function (d) {
+      var b = el("button", "filter"); b.type = "button"; b.setAttribute("aria-pressed", String(ideaFilter === d[0]));
+      b.appendChild(document.createTextNode(d[1])); b.appendChild(el("b", null, String(cnt[d[0]])));
+      b.onclick = function () { ideaFilter = d[0]; renderIdeas(); }; $filters.appendChild(b);
+    });
+    var sel = document.createElement("select"); sel.className = "svc"; sel.setAttribute("aria-label", "Spécialité");
+    ["all", "Fertilité", "Chirurgie esthétique", "Optique"].forEach(function (v) { var o = document.createElement("option"); o.value = v; o.textContent = v === "all" ? "Toutes les spécialités" : v; if (v === ideaService) o.selected = true; sel.appendChild(o); });
+    sel.onchange = function () { ideaService = sel.value; renderIdeas(); }; $filters.appendChild(sel);
+    var rf = el("button", "refresh", "Actualiser"); rf.type = "button"; rf.onclick = loadIdeas; $filters.appendChild(rf);
+    $app.textContent = "";
+    if (!ideasLoaded) { var l = el("div", "empty"); l.appendChild(el("h2", null, "Chargement des idées")); $app.appendChild(l); return; }
+    var v = ideaList();
+    if (!v.length) { var e = el("div", "empty"); e.appendChild(el("h2", null, "Rien ici pour le moment")); e.appendChild(el("p", null, "De nouvelles idées arrivent après chaque recherche.")); $app.appendChild(e); return; }
+    var box = el("div", "ideas");
+    if (msg) box.appendChild(el("div", "note" + (msgErr ? " err" : ""), msg));
+    v.forEach(function (i) {
+      var row = el("div", "idea"), tx = el("div");
+      tx.appendChild(el("div", "t", i.idea));
+      var m = el("div", "m");
+      if (i.potential) m.appendChild(el("span", "chip " + (i.potential === "Élevé" ? "ok" : i.potential === "Moyen" ? "" : "warn"), "Potentiel " + i.potential.toLowerCase()));
+      m.appendChild(el("span", "tag", i.service)); tx.appendChild(m);
+      var bt = el("div", "btns");
+      if (ideaFilter === "todo") {
+        var ok = el("button", "btn primary sm", "Approuver"); ok.type = "button"; ok.disabled = busy; ok.onclick = function () { saveIdea(i, "approve"); };
+        var no = el("button", "btn sm", "Rejeter"); no.type = "button"; no.disabled = busy; no.onclick = function () { saveIdea(i, "reject"); };
+        bt.appendChild(ok); bt.appendChild(no);
+      } else {
+        var back = el("button", "btn sm", "Remettre à décider"); back.type = "button"; back.disabled = busy; back.onclick = function () { saveIdea(i, "reset"); }; bt.appendChild(back);
+      }
+      row.appendChild(tx); row.appendChild(bt); box.appendChild(row);
+    });
+    $app.appendChild(box);
+  }
+  function loadIdeas() {
+    google.script.run
+      .withSuccessHandler(function (res) { ideas = res; ideasLoaded = true; if (mode === "ideas") renderIdeas(); })
+      .withFailureHandler(function () { ideasLoaded = true; ideas = []; if (mode === "ideas") renderIdeas(); })
+      .getIdeas();
+  }
+  function render() {
+    renderModes();
+    if (mode === "ideas") { renderIdeas(); return; }
+    renderFilters();
+    var v = visible(); $app.textContent = "";
+    if (!loaded) return;
+    if (!posts.length) {
+      var e = el("div", "empty"); e.appendChild(el("h2", null, "Aucune publication à relire pour le moment"));
+      e.appendChild(el("p", null, "Les carrousels apparaissent ici dès qu'ils sont prêts."));
+      $app.appendChild(e); return;
+    }
+    if (!v.length) { var e2 = el("div", "empty"); e2.appendChild(el("h2", null, "Rien dans cette catégorie")); e2.appendChild(el("p", null, "Choisis une autre catégorie ci-dessus.")); $app.appendChild(e2); return; }
+    if (!v.some(function (p) { return p.row === selRow; })) selRow = v[0].row;
+    var lay = el("div", "layout"); lay.appendChild(renderList(v));
+    var st = el("div", "stage"); st.id = "stage"; lay.appendChild(st); $app.appendChild(lay);
+    renderStage();
+  }
+  function load() {
+    google.script.run
+      .withSuccessHandler(function (res) { posts = res; loaded = true; render(); })
+      .withFailureHandler(function () {
+        loaded = true; posts = []; $app.textContent = "";
+        var e = el("div", "empty"); e.appendChild(el("h2", null, "Impossible de charger les publications")); e.appendChild(el("p", null, "Actualise la page dans un instant."));
+        $app.appendChild(e);
+      })
+      .getPosts();
+  }
+  render();
+  loadIdeas();
+  load();
+})();
+</script>
+</body>
+</html>
