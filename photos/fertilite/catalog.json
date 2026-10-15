@@ -1,6 +1,141 @@
 {
+  "360_F_240693748_dJg2rJiXg3bolGvsPEbB7zIKj6husdlM.jpg": {
+    "description": "Black couple laughing and embracing in a green park, joyful, bright, landscape, low resolution",
+    "themes": [
+      "couple",
+      "bonheur",
+      "amour",
+      "parc",
+      "complicite",
+      "desir",
+      "enfant"
+    ],
+    "subjects_black": true,
+    "logo": "auto",
+    "focus_x": 50,
+    "focus_y": 50,
+    "crop": "ok"
+  },
+  "NYC-Engagement-Shoot-Kathryn-Cooper-Weddings-1767x1178.jpg": {
+    "description": "Black couple in a tender embrace on a city street, soft focus background, intimate calm mood, landscape, high resolution",
+    "themes": [
+      "couple",
+      "amour",
+      "complicite",
+      "tendresse",
+      "mariage",
+      "desir",
+      "enfant"
+    ],
+    "subjects_black": true,
+    "logo": "auto",
+    "focus_x": 55,
+    "focus_y": 50,
+    "crop": "ok"
+  },
+  "black-mother-taking-car-her-child_23-2149836780.avif": {
+    "description": "Black mother carrying her sleepy toddler against a window with soft light, tender calm mood, portrait",
+    "themes": [
+      "maternite",
+      "mere",
+      "enfant",
+      "tendresse",
+      "deuxieme",
+      "bebe",
+      "infertilite",
+      "secondaire"
+    ],
+    "subjects_black": true,
+    "logo": "auto",
+    "focus_x": 50,
+    "focus_y": 30,
+    "crop": "ok"
+  },
+  "black-young-man-his-girlfriend-hugging-romantic-couple-walking-autumn-park-man-woman-wearing-black-coats_1157-51270.avif": {
+    "description": "Young Black couple hugging in an autumn park, warm colours, romantic, landscape",
+    "themes": [
+      "couple",
+      "amour",
+      "complicite",
+      "romantique",
+      "soutien"
+    ],
+    "subjects_black": true,
+    "logo": "auto",
+    "focus_x": 50,
+    "focus_y": 50,
+    "crop": "ok"
+  },
+  "black_moms_and_burnout-hero-Stocksy-5525866.webp": {
+    "description": "Black mother kissing her baby in a quiet room near a crib, calm intimate mood, landscape",
+    "themes": [
+      "maternite",
+      "bebe",
+      "mere",
+      "fatigue",
+      "fertilite",
+      "apres",
+      "accouchement"
+    ],
+    "subjects_black": true,
+    "logo": "auto",
+    "focus_x": 35,
+    "focus_y": 50,
+    "crop": "ok"
+  },
+  "black_pregnant_woman_1200_x750-c043f51317b49983bb59e8cfe753435a.jpg": {
+    "description": "Black pregnant woman standing by a bright window with a hand on her belly, serene, flowers in background, landscape",
+    "themes": [
+      "grossesse",
+      "enceinte",
+      "attente",
+      "espoir",
+      "douceur"
+    ],
+    "subjects_black": true,
+    "logo": "auto",
+    "focus_x": 62,
+    "focus_y": 50,
+    "crop": "ok"
+  },
+  "doctor-black-couple-consulting-healthcare-checkup-appointment-life-insurance-hospital-happy-man-woman-smiling-medical-consultation-help-advice-from-professional-clinic-gp_590464-161378.avif": {
+    "description": "Smiling Black couple sitting at a doctor's desk in a clinic, wide group shot of three people, landscape, a crop to portrait cuts one person",
+    "themes": [
+      "bilan",
+      "couple",
+      "medecin",
+      "rendez",
+      "vous",
+      "clinique",
+      "spermogramme",
+      "examens"
+    ],
+    "subjects_black": true,
+    "logo": "auto",
+    "focus_x": 60,
+    "focus_y": 50,
+    "crop": "cuts a person, set focus_x on the couple"
+  },
+  "doctor-black-woman-healthcare-consultation-with-wellness-hospital-worker-office-consulting-patient-happy-female-with-smile-from-health-communication-expert-advice-clinic_590464-175968.avif": {
+    "description": "Smiling Black woman patient with a doctor in a clinic office, doctor seen from behind on the right, landscape",
+    "themes": [
+      "bilan",
+      "medecin",
+      "rendez",
+      "vous",
+      "clinique",
+      "patiente",
+      "examens",
+      "ecoute"
+    ],
+    "subjects_black": true,
+    "logo": "auto",
+    "focus_x": 25,
+    "focus_y": 50,
+    "crop": "ok"
+  },
   "grossesse_maman_bebe_01.jpg": {
-    "description": "Smiling Black mother lifting her laughing baby in a light denim dress, bright white studio wall, warm joyful mood, subjects in the upper two thirds, calm space at the bottom",
+    "description": "Smiling Black mother lifting her laughing baby in a denim dress, bright white wall, joyful, portrait, calm space at the bottom",
     "themes": [
       "grossesse",
       "bebe",
@@ -10,6 +145,205 @@
     ],
     "subjects_black": true,
     "logo": "dark",
-    "focus_y": 92
+    "focus_x": 50,
+    "focus_y": 92,
+    "crop": "ok"
+  },
+  "how-to-be-an-ally-for-black-birth-justice-the-everymom-web-f-h.png": {
+    "description": "Close up of a Black mother with curly hair kissing her newborn, yellow top, soft grey background, warm tender mood",
+    "themes": [
+      "naissance",
+      "nouveau",
+      "ne",
+      "maternite",
+      "tendresse",
+      "bebe"
+    ],
+    "subjects_black": true,
+    "logo": "dark",
+    "focus_x": 50,
+    "focus_y": 50,
+    "crop": "ok"
+  },
+  "images.jpeg": {
+    "description": "Black woman holding up a laughing baby in white against a bright blank wall, joyful, large empty space on the left, low resolution",
+    "themes": [
+      "bebe",
+      "joie",
+      "maternite",
+      "bonheur",
+      "fertilite"
+    ],
+    "subjects_black": true,
+    "logo": "dark",
+    "focus_x": 60,
+    "focus_y": 50,
+    "crop": "ok"
+  },
+  "istockphoto-1353379254-612x612.jpg": {
+    "description": "Black family on a sofa at home, father laughing with daughter on his shoulders, mother beside, warm bright living room, landscape",
+    "themes": [
+      "famille",
+      "bonheur",
+      "enfant",
+      "couple",
+      "foyer",
+      "desir",
+      "enfant"
+    ],
+    "subjects_black": true,
+    "logo": "auto",
+    "focus_x": 45,
+    "focus_y": 50,
+    "crop": "ok"
+  },
+  "istockphoto-1495030722-612x612.jpg": {
+    "description": "Female doctor talking with a Black woman patient in an ultrasound room, echography machine visible, teal walls, landscape",
+    "themes": [
+      "echographie",
+      "bilan",
+      "hormonal",
+      "ovulation",
+      "sopk",
+      "endometriose",
+      "medecin",
+      "explication",
+      "examen"
+    ],
+    "subjects_black": true,
+    "logo": "auto",
+    "focus_x": 55,
+    "focus_y": 50,
+    "crop": "ok"
+  },
+  "istockphoto-1600750132-612x612.jpg": {
+    "description": "Black father playing with his two children and wife in a bright kitchen, cheerful, landscape",
+    "themes": [
+      "famille",
+      "bonheur",
+      "enfants",
+      "couple",
+      "desir",
+      "enfant",
+      "parents"
+    ],
+    "subjects_black": true,
+    "logo": "auto",
+    "focus_x": 45,
+    "focus_y": 50,
+    "crop": "ok"
+  },
+  "istockphoto-2060051276-612x612.jpg": {
+    "description": "Black family of four outdoors on a hill, father carrying a child on his shoulders, green countryside, landscape",
+    "themes": [
+      "famille",
+      "bonheur",
+      "enfants",
+      "parents",
+      "couple",
+      "avenir"
+    ],
+    "subjects_black": true,
+    "logo": "dark",
+    "focus_x": 50,
+    "focus_y": 50,
+    "crop": "ok"
+  },
+  "istockphoto-2216095678-612x612.jpg": {
+    "description": "Female doctor with a tablet explaining something to a smiling Black woman patient in a bright clinic, landscape",
+    "themes": [
+      "bilan",
+      "medecin",
+      "explication",
+      "examen",
+      "patiente",
+      "clinique",
+      "resultats"
+    ],
+    "subjects_black": true,
+    "logo": "auto",
+    "focus_x": 70,
+    "focus_y": 50,
+    "crop": "ok"
+  },
+  "istockphoto-892531366-612x612.jpg": {
+    "description": "Smiling Black pregnant woman outdoors in a park holding her belly and looking down, portrait, green blurred background",
+    "themes": [
+      "grossesse",
+      "enceinte",
+      "espoir",
+      "bonheur"
+    ],
+    "subjects_black": true,
+    "logo": "auto",
+    "focus_x": 50,
+    "focus_y": 30,
+    "crop": "ok"
+  },
+  "pregnant-sofa-black-woman-hands-with-hope-feeling-relax-mother-love-mom-care-couch-living-room-lounge-with-person-holding-abdomen-happy-about-pregnancy-lifestyle-baby-house_590464-145835.avif": {
+    "description": "Black pregnant woman relaxing on a sofa at home holding her belly, calm, soft light, portrait",
+    "themes": [
+      "grossesse",
+      "enceinte",
+      "attente",
+      "maison",
+      "calme",
+      "espoir"
+    ],
+    "subjects_black": true,
+    "logo": "auto",
+    "focus_x": 50,
+    "focus_y": 40,
+    "crop": "ok"
+  },
+  "side-view-smiley-couple_23-2148850946.avif": {
+    "description": "Smiling Black couple embracing against a dark brown studio background, orange and brown clothes, portrait, dark behind the logo",
+    "themes": [
+      "couple",
+      "amour",
+      "complicite",
+      "desir",
+      "enfant",
+      "soutien"
+    ],
+    "subjects_black": true,
+    "logo": "white",
+    "focus_x": 50,
+    "focus_y": 30,
+    "crop": "ok"
+  },
+  "tender-mother-daughter-spending-time-beach-african-american-family-walking-laughing-playing-riding-back-leisure-family-time-parenthood-concept_74855-24702.avif": {
+    "description": "Black mother carrying her laughing daughter piggyback on a beach, warm sunny colours, landscape",
+    "themes": [
+      "mere",
+      "fille",
+      "maternite",
+      "bonheur",
+      "famille",
+      "enfant"
+    ],
+    "subjects_black": true,
+    "logo": "auto",
+    "focus_x": 50,
+    "focus_y": 50,
+    "crop": "ok"
+  },
+  "young-black-woman-at-doctors-office.jpg": {
+    "description": "Young Black woman patient with a female doctor taking notes in a bright clinic room, wide landscape, patient on the right",
+    "themes": [
+      "bilan",
+      "medecin",
+      "patiente",
+      "clinique",
+      "examen",
+      "rendez",
+      "vous",
+      "ecoute"
+    ],
+    "subjects_black": true,
+    "logo": "auto",
+    "focus_x": 80,
+    "focus_y": 50,
+    "crop": "ok"
   }
 }

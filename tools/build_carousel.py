@@ -8,6 +8,7 @@ spec.json:
   "photo": "photos/grossesse_maman_bebe_01.jpg",   # path inside the repo
   "out": "slides/sopk",                            # output folder inside the repo
   "logo": "auto",                                  # optional on slide 1: "auto" (white when the photo is dark behind the logo), "white" or "dark" (default auto)
+  "focus_x": 50,                                   # optional, 0 to 100, horizontal focus of the photo (default 50)
   "focus_y": 92,                                   # optional, 0 to 100, vertical focus of the photo (default 92)
   "hook": "SOPK et grossesse : ce que personne ne t'explique",
   "s2": ["paragraph", "paragraph"],
@@ -33,6 +34,18 @@ def ensure_fonts():
 def b64(path):
     return base64.b64encode(open(path, 'rb').read()).decode()
 
+def prepare_photo(path):
+    """Open any format (jpg, png, webp, avif), upscale with Lanczos so it covers 1080x1350, sharpen lightly, return base64 JPEG."""
+    import io
+    from PIL import Image, ImageFilter
+    im = Image.open(path).convert('RGB')
+    w, h = im.size
+    k = max(1080 / w, 1350 / h)
+    if k > 1:
+        im = im.resize((round(w * k), round(h * k)), Image.LANCZOS).filter(ImageFilter.UnsharpMask(radius=2, percent=60, threshold=3))
+    buf = io.BytesIO(); im.save(buf, 'JPEG', quality=95)
+    return base64.b64encode(buf.getvalue()).decode()
+
 def rich(t):
     t = html.escape(t)
     return re.sub(r'\*\*(.+?)\*\*', r'<span style="font-weight:800;color:#3f7fae">\1</span>', t)
@@ -47,9 +60,10 @@ def page(fonts, body):
 
 def build(spec):
     fonts = ensure_fonts()
-    photo = 'data:image/jpeg;base64,' + b64(os.path.join(REPO, spec['photo']))
+    photo = 'data:image/jpeg;base64,' + prepare_photo(os.path.join(REPO, spec['photo']))
     logo = 'data:image/png;base64,' + b64(os.path.join(REPO, 'assets/logo.png'))
     fy = spec.get('focus_y', 92)
+    fx = spec.get('focus_x', 50)
     mode = spec.get('logo', 'auto')
     if mode == 'auto':
         from PIL import Image
@@ -61,11 +75,12 @@ def build(spec):
     logo1 = 'data:image/png;base64,' + b64(os.path.join(REPO, 'assets/logo_white.png' if mode == 'white' else 'assets/logo.png'))
     root = "position:relative;width:1080px;height:1350px;overflow:hidden;font-family:'Montserrat',sans-serif;"
     def logo_tag(src): return f'<img src="{src}" style="position:absolute;left:390px;top:50px;width:300px;height:109px">'
-    def photo_tag(extra): return f'<img src="{photo}" style="position:absolute;left:0;top:0;width:1080px;height:1350px;object-fit:cover;object-position:50% {fy}%;{extra}">'
+    def photo_tag(extra): return f'<img src="{photo}" style="position:absolute;left:0;top:0;width:1080px;height:1350px;object-fit:cover;object-position:{fx}% {fy}%;{extra}">'
+    hl = len(spec['hook']); hook_fs = 74 if hl <= 42 else 66 if hl <= 56 else 58
     slides = []
     slides.append(f'<div style="{root}background:#f3f5f7">{photo_tag("")}'
         '<div style="position:absolute;left:0;top:0;width:1080px;height:1350px;background:linear-gradient(180deg,rgba(97,157,192,0) 0%,rgba(97,157,192,0) 50%,rgba(70,130,175,0.9) 76%,#3f7fae 100%)"></div>'
-        f'{logo_tag(logo1)}<div style="position:absolute;left:108px;top:930px;width:864px;color:#fff;font-size:74px;font-weight:800;line-height:1.12;letter-spacing:-1.5px;text-transform:uppercase">{html.escape(spec["hook"])}</div></div>')
+        f'{logo_tag(logo1)}<div style="position:absolute;left:108px;bottom:130px;width:864px;color:#fff;font-size:{hook_fs}px;font-weight:800;line-height:1.12;letter-spacing:-1.5px;text-transform:uppercase">{html.escape(spec["hook"])}</div></div>')
     def text_slide(paras, weight=500, extra=''):
         fs = size_for(paras)
         inner = ''.join(f'<div>{rich(p)}</div>' for p in paras) + extra
