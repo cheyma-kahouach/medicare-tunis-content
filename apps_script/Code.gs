@@ -55,7 +55,15 @@ function getPosts() {
       example: /^EXEMPLE/i.test(String(r[1]))
     });
   });
-  return posts;
+  // Plafond : 5 publications par spécialité à relire (À relire ou À modifier), 15 au total.
+  var MAX_PER_SERVICE = 5, seen = {};
+  return posts.filter(function (p) {
+    if (p.example) return true;
+    if (p.status !== 'À relire' && p.status !== 'À modifier') return true;
+    var k = p.service || '?';
+    seen[k] = (seen[k] || 0) + 1;
+    return seen[k] <= MAX_PER_SERVICE;
+  });
 }
 
 // action: 'approve', 'changes' ou 'reset'
