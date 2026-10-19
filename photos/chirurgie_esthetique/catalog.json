@@ -1,1 +1,196 @@
-{}
+{
+ "1000_F_636904947_pJpkz8ze1pnmxFL8zJkFkR1VUvLXmpmL.jpg": {
+  "description": "Smiling Black woman with short bleached hair, a doctor in blue gloves gently framing her face, blurred clinic, calm trust, landscape",
+  "themes": [
+   "visage",
+   "bilan",
+   "medecin",
+   "rendez",
+   "vous",
+   "examen",
+   "avant",
+   "confiance"
+  ],
+  "subjects_black": true,
+  "logo": "dark",
+  "focus_x": 30,
+  "focus_y": 50,
+  "crop": "ok"
+ },
+ "430d9b26-1001-44dc-9762-ffa3bc541915.jpeg": {
+  "description": "Black woman with short bleached hair smiling while a doctor in blue gloves presses lightly on her nose, clinic, landscape",
+  "themes": [
+   "nez",
+   "rhinoplastie",
+   "examen",
+   "mains",
+   "douleur",
+   "palpation",
+   "narines"
+  ],
+  "subjects_black": true,
+  "logo": "dark",
+  "focus_x": 35,
+  "focus_y": 50,
+  "crop": "ok"
+ },
+ "47a1a0fd-3d8d-4946-9243-62eb4413a233.jpeg": {
+  "description": "Black woman in side profile, doctor's gloved hands examining her nose, bright clinic with equipment, calm, landscape",
+  "themes": [
+   "nez",
+   "rhinoplastie",
+   "profil",
+   "examen",
+   "forme",
+   "respirer",
+   "bilan"
+  ],
+  "subjects_black": true,
+  "logo": "dark",
+  "focus_x": 35,
+  "focus_y": 50,
+  "crop": "ok"
+ },
+ "A-Sustainable-Maintenance-Plan-After-Plastic-Surgery.jpg": {
+  "description": "Smiling woman with curly hair on brown studio background, ethnicity ambiguous, landscape",
+  "themes": [
+   "sourire",
+   "portrait"
+  ],
+  "subjects_black": false,
+  "logo": "white",
+  "focus_x": 50,
+  "focus_y": 40,
+  "crop": "ok"
+ },
+ "Aestira-Plastic-Surgery-1-1024x708.jpg": {
+  "description": "Close portrait of a Black woman with hair in a bun, calm direct gaze, soft grey background, natural glowing skin, landscape",
+  "themes": [
+   "visage",
+   "portrait",
+   "naturel",
+   "confiance",
+   "peau",
+   "nez"
+  ],
+  "subjects_black": true,
+  "logo": "dark",
+  "focus_x": 35,
+  "focus_y": 50,
+  "crop": "ok"
+ },
+ "Aestira-Plastic-Surgery-Lip-Augmentation-1024x708.jpg": {
+  "description": "Black woman in side profile touching her lips, eyes closed, soft grey background, empty space on the left, landscape",
+  "themes": [
+   "profil",
+   "nez",
+   "levres",
+   "douceur",
+   "esthetique",
+   "visage"
+  ],
+  "subjects_black": true,
+  "logo": "dark",
+  "focus_x": 70,
+  "focus_y": 50,
+  "crop": "ok"
+ },
+ "Procedures.jpg": {
+  "description": "Smiling Black woman with braids, gloved hands framing her face, grey studio background, landscape",
+  "themes": [
+   "visage",
+   "sourire",
+   "bilan",
+   "examen",
+   "medecin",
+   "esthetique"
+  ],
+  "subjects_black": true,
+  "logo": "dark",
+  "focus_x": 45,
+  "focus_y": 50,
+  "crop": "ok"
+ },
+ "Tarifs-chirurgie-esthetique-tunisie.webp": {
+  "description": "Serious young Black woman with a doctor's gloved hands on her face, bright clinic, empty space on the left, landscape",
+  "themes": [
+   "bilan",
+   "examen",
+   "medecin",
+   "visage",
+   "evaluation",
+   "age",
+   "ecoute"
+  ],
+  "subjects_black": true,
+  "logo": "dark",
+  "focus_x": 70,
+  "focus_y": 50,
+  "crop": "ok"
+ },
+ "doctor-plastic-surgery-checking-african-girl-face-plain-background-50957865.webp": {
+  "description": "Young Black woman facing camera, doctor's gloved hands touching her head and chin, light grey background, portrait",
+  "themes": [
+   "bilan",
+   "examen",
+   "visage",
+   "medecin",
+   "age",
+   "jeune",
+   "evaluation"
+  ],
+  "subjects_black": true,
+  "logo": "dark",
+  "focus_x": 50,
+  "focus_y": 30,
+  "crop": "ok"
+ },
+ "images (1).jpeg": {
+  "description": "Black woman in profile with dotted surgical marking lines on her jaw, a gloved hand holding a marker, peach background, landscape",
+  "themes": [
+   "marquage",
+   "preparation",
+   "intervention",
+   "visage",
+   "chirurgien",
+   "planification"
+  ],
+  "subjects_black": true,
+  "logo": "dark",
+  "focus_x": 55,
+  "focus_y": 50,
+  "crop": "ok"
+ },
+ "images (2).jpeg": {
+  "description": "Black woman with dotted marks on her face, doctor in gloves drawing with a marker, grey background, landscape",
+  "themes": [
+   "marquage",
+   "preparation",
+   "chirurgien",
+   "planification",
+   "visage"
+  ],
+  "subjects_black": true,
+  "logo": "dark",
+  "focus_x": 55,
+  "focus_y": 50,
+  "crop": "ok"
+ },
+ "shutterstock_256900618.jpg": {
+  "description": "Young Black woman facing camera with a vertical dotted line down her face, doctor marking her forehead, grey background, landscape",
+  "themes": [
+   "marquage",
+   "preparation",
+   "symetrie",
+   "planification",
+   "chirurgien",
+   "visage",
+   "nez"
+  ],
+  "subjects_black": true,
+  "logo": "dark",
+  "focus_x": 62,
+  "focus_y": 50,
+  "crop": "ok"
+ }
+}
