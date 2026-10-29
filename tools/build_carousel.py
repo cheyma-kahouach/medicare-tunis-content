@@ -13,7 +13,8 @@ spec.json:
   "hook": "SOPK et grossesse : ce que personne ne t'explique",
   "s2": ["paragraph", "paragraph"],
   "s3": ["**MYTHE :** text", "paragraph"],         # **bold** renders bold blue
-  "s4": ["paragraph", "paragraph"]
+  "s4": ["paragraph", "paragraph"],
+  "wa": "+216 29 889 633 / +216 98 757 394"  # optional, overrides the number format on slide 5
 }
 Slide 5 is the fixed CTA plus the WhatsApp line, never passed in.
 """
@@ -88,7 +89,7 @@ def build(spec):
                 f'<div style="position:absolute;left:108px;top:230px;width:864px;height:980px;display:flex;flex-direction:column;justify-content:center;gap:36px;font-size:{fs}px;font-weight:{weight};line-height:1.25;letter-spacing:-0.8px">{inner}</div></div>')
     for k in ('s2', 's3', 's4'):
         slides.append(text_slide(spec[k]))
-    wa = f'<div style="display:flex;flex-direction:column;gap:8px;padding-top:16px;font-size:40px;font-weight:800;color:#3f7fae"><span>WhatsApp</span><span style="color:#1b204d">{WA}</span></div>'
+    wa = f'<div style="display:flex;flex-direction:column;gap:8px;padding-top:16px;font-size:40px;font-weight:800;color:#3f7fae"><span>WhatsApp</span><span style="color:#1b204d">{spec.get('wa', WA)}</span></div>'
     slides.append(text_slide([CTA1, CTA2], 700, wa))
     out = os.path.join(REPO, spec['out']); os.makedirs(out, exist_ok=True)
     tmp = '/tmp/mt_render'; os.makedirs(tmp, exist_ok=True)
